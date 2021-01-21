@@ -36,8 +36,8 @@
 			<td>${guestVo.guestno} </td>
 			<td>${guestVo.name}</td>
 			<td>${guestVo.date}</td>
-			<td><a href= "${pageContext.request.contextPath}/guest/confirmpassword/modifyForm/${guestVo.guestno}">수정</a></td>
-			<td><a href= "${pageContext.request.contextPath}/guest/confirmpassword/delete/${guestVo.guestno}">삭제</a></td>
+			<td><a href= "${pageContext.request.contextPath}/guest/confirmpassword?where=modifyForm&no=${guestVo.guestno}">수정</a></td>
+			<td><a href= "${pageContext.request.contextPath}/guest/confirmpassword?where=delete&no=${guestVo.guestno}">삭제</a></td>
 			
 		</tr>
 		<tr>

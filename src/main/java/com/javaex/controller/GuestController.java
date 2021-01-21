@@ -45,22 +45,31 @@ public class GuestController {
 	}
 	
 	@RequestMapping(value = "confirmpassword/{where}/{guestno}", method = { RequestMethod.GET, RequestMethod.POST })
-	public String confirmpassword(@PathVariable("where")String where, 
-								  @PathVariable("guestno") int no,
-								  Model model) {
+	public String confirmpassword2(@PathVariable("where")String where, 
+								  @PathVariable("guestno") int no
+								  /*Model model*/) {
 		System.out.print("confirmpassword:");
 
 		System.out.println(where);
 		
-		model.addAttribute("where",where);
-		model.addAttribute("no",no);
+		//model.addAttribute("where",where);
+		//model.addAttribute("no",no);
 		return "confirmpassword";
 	}
 	
-	@RequestMapping(value = "notsamepwd/{where}/{guestno}", method = { RequestMethod.GET, RequestMethod.POST })
-	public String notsamepwd(@PathVariable("where")String where, 
-						 	 @PathVariable("guestno") int no, 
-						 	 @RequestParam("pwd") String pwd,Model model) {
+	@RequestMapping(value = "confirmpassword", method = { RequestMethod.GET, RequestMethod.POST })
+	public String confirmpassword() {
+		System.out.print("confirmpassword:");
+
+		//model.addAttribute("where",where);
+		//model.addAttribute("no",no);
+		return "confirmpassword";
+	}
+	
+	@RequestMapping(value = "notsamepwd", method = { RequestMethod.GET, RequestMethod.POST })
+	public String notsamepwd(@RequestParam("pwd") String pwd,
+							 @RequestParam("where")String where, 
+						 	 @RequestParam("no") int no) {
 		
 		System.out.print("notsamepwd:");
 		System.out.println(where);
@@ -71,12 +80,22 @@ public class GuestController {
 		System.out.println("pwd = "+pwd);
 		System.out.println("pwd2 = "+pwd2);
 		if(pwd.equals(pwd2)) {
-			return "redirect:/guest/"+where+"/"+no;
+			return "redirect:"+where+"/"+no;
 		}else {
-			model.addAttribute("where",where);
-			model.addAttribute("no",no);
+			
 			return "notsamepwd";
 		}
+	}
+	
+	@RequestMapping(value = "delete/{no}", method = { RequestMethod.GET, RequestMethod.POST })
+	public String delete(@PathVariable("no") int no) {
+		
+		System.out.println("delete");
+
+
+		guestDao.guestDelete(no);
+	
+		return "redirect:/guest/list";
 	}
 	
 	@RequestMapping(value = "modifyForm/{no}", method = { RequestMethod.GET, RequestMethod.POST })
@@ -98,16 +117,7 @@ public class GuestController {
 		return "redirect:/guest/list";
 	}
 	
-	@RequestMapping(value = "delete/{no}", method = { RequestMethod.GET, RequestMethod.POST })
-	public String delete(@PathVariable("no") int no) {
-		
-		System.out.println("delete");
-
-
-		guestDao.guestDelete(no);
 	
-		return "redirect:/guest/list";
-	}
 	
 
 }

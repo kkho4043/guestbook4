@@ -8,7 +8,7 @@
 <body>
 	
 	비밀번호가 틀렸습니다.<br>
-	<a href= "${pageContext.request.contextPath}/guest/confirmpassword/${where}/${no}">다시입력하기</a>
+	<a href= "${pageContext.request.contextPath}/guest/confirmpassword?where=${param.where}&no=${param.no}">다시입력하기</a>
 	<a href= "${pageContext.request.contextPath}/guest/list">리스트로가기</a>
 </body>
 </html>
